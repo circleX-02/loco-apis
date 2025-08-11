@@ -15,6 +15,8 @@ app.use(express.json())
 app.use("/api", require("./routes/user"));
 app.use("/api", require("./routes/auth"));
 app.use("/api", require("./routes/admin"));
+app.use("/api", require("./routes/allBus"));
+
 
 const PORT = 5050;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
