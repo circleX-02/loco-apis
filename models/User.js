@@ -7,11 +7,7 @@ const userSchema = new mongoose.Schema({
     password: String,
     phone: String,
     address: String,
-    businessCategory: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Category", // references Category collection
-      required: true
-    },
+    businessCategory: { type: String,required: true },  // <-- Category _id
     description: String,
     logoUrl: String,
     galleryImages: [String],
