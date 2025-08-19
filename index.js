@@ -20,10 +20,13 @@ app.use("/api", require("./routes/admin"));
 app.use("/api", require("./routes/allBus"));
 
 // Get all categories
-router.get("/api/categories", async (req, res) => {
+app.get("/api/categories", async (req, res) => {
+  try {
     const categories = await Category.find();
     res.json(categories);
-  });
-
+  } catch (error) {
+    res.status(500).json({ message: "Server Error", error });
+  }
+});
 const PORT = 5050;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
