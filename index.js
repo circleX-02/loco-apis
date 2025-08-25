@@ -20,6 +20,8 @@ app.use("/api", require("./routes/user"));
 app.use("/api", require("./routes/auth"));
 app.use("/api", require("./routes/admin"));
 app.use("/api", require("./routes/allBus"));
+app.use("/api", require("./routes/approve"));
+
 
 // Get all categories
 app.get("/api/categories", async (req, res) => {
