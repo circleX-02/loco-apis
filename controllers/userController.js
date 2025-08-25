@@ -62,7 +62,7 @@ if (existingUser) {
 
 
 
-        const hashedPassword = await bcrypt.hash(password, 10);
+        // const hashedPassword = await bcrypt.hash(password, 10);
         // 2. Upload logo
     const logoPath = req.files?.logo?.[0]?.path;
     const logoUpload = await cloudinary.uploader.upload(logoPath, {
@@ -89,7 +89,7 @@ const galleryImages = gallery;
             plan,
             businessName,
             email,
-            password: hashedPassword,
+            password,
             phone,
             address,
             businessCategory,
