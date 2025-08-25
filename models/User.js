@@ -16,11 +16,24 @@ const userSchema = new mongoose.Schema({
     enum: ["pending", "approved", "rejected"],
     default: "pending"
   },
+    galleryImages: [String],
+     status: {
+    type: String,
+    enum: ["pending", "approved", "rejected"],
+    default: "pending"
+  },
   role: {
     type: String,
     enum: ['user', 'admin'],
     default: 'user', // Default to 'user' for non-admins
   },
+  ratings: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Rating" // references Rating collection
+    }
+  ]
+
 })
 
 
