@@ -13,6 +13,7 @@ exports.registerUser = async(req,res) => {
             phone,
             address,
             businessCategory,
+            businessCategoryName,
             description,
 
         }  = req.body;
@@ -28,9 +29,11 @@ exports.registerUser = async(req,res) => {
   !phone ||
   !address ||
   !businessCategory ||
+  !businessCategoryName ||
   !description ||
   !req.files?.logo?.length ||
-  !req.files?.gallery?.length
+  !req.files?.gallery?.length ||
+  !req.files?.cover?.length
 ) {
   console.log({
     plan,
@@ -40,9 +43,11 @@ exports.registerUser = async(req,res) => {
     phone,
     address,
     businessCategory,
+    businessCategoryName,
     description,
     logo: req.files?.logo,
-    gallery: req.files?.gallery
+    gallery: req.files?.gallery,
+    cover: req.files?.cover
   });
 
   return res.status(400).json({
@@ -70,6 +75,15 @@ if (existingUser) {
     });
     fs.unlinkSync(logoPath); // delete local file
 
+
+    const coverPath = req.files?.cover?.[0]?.path;
+    const coverUpload = await cloudinary.uploader.upload(coverPath, {
+      folder: "business/cover",
+    });
+    fs.unlinkSync(coverPath); 
+
+
+
     // 3. Upload gallery images
     const gallery = [];
     for (let file of req.files.gallery || []) {
@@ -82,6 +96,7 @@ if (existingUser) {
 
 
     const logoUrl = logoUpload.secure_url;
+    const coverUrl = coverUpload.secure_url;
 const galleryImages = gallery;
 
 
@@ -93,11 +108,13 @@ const galleryImages = gallery;
             phone,
             address,
             businessCategory,
+            businessCategoryName,
             description,
             logoUrl,
             galleryImages,
             logoUrl,
-            galleryImages
+            galleryImages,
+            coverUrl
           });
 
           await user.save();

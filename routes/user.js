@@ -7,6 +7,7 @@ router.post('/register',
     parser.fields([
         {name : "logo", maxCount: 1},
         {name : "gallery", maxCount: 4},
+        {name : "cover", maxCount: 4},
 
     ]),
     

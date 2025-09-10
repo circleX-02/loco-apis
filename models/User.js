@@ -8,8 +8,16 @@ const userSchema = new mongoose.Schema({
     phone: String,
     address: String,
     businessCategory: { type: String,required: true },  // <-- Category _id
+    businessCategory: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Category",  
+      required: true,
+    },
+    businessCategoryName: String, // also store the name
+  
     description: String,
     logoUrl: String,
+    coverUrl: String,
     galleryImages: [String],
      status: {
     type: String,
